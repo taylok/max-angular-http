@@ -13,22 +13,34 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent implements OnInit {
   loadedPosts = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+   }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     //console.log(postData);
     this.http.post('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
-      .subscribe(responseData => {console.log(responseData);});
+      .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
 
   onFetchPosts() {
     // Send Http request
+    this.fetchPosts();
   }
 
   onClearPosts() {
     // Send Http request
+  }
+
+  private fetchPosts() {
+    this.http.get('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+      .subscribe(posts => {
+        console.log(posts);
+      });
   }
 }
