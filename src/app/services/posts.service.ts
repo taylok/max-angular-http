@@ -33,4 +33,10 @@ export class PostsService {
       })
     );
   }
+
+  deletePosts() {
+    // Subscribe within Component controller so it can clear loadedPosts array; return observable 
+    return this.http.delete('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json');
+  }
+
 }
