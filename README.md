@@ -20,3 +20,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | 0.6.0 | Handling Errors                        | Errors              |
 | 0.6.1 | Using Subjects for error handling      | Errors              |
 | 0.6.2 | Fix recent deprecatation for subscribe | RxJs                |
+| 0.6.3 | Catch Error                            | RxJs                |
