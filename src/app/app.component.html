@@ -39,7 +39,14 @@
   </div>
   <div>
     <div>
+      @if (loadedPosts.length < 1) {
       <p>No posts available!</p>
+      } @else { @for (post of loadedPosts; track post) {
+      <ul>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content }}</p>
+      </ul>
+      } }
     </div>
   </div>
 </div>
