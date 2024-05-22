@@ -18,7 +18,7 @@ export interface Post {
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
     this.fetchPosts();
   }
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
     //console.log(postData);
-    this.http.post<{name: string}>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
+    this.http.post<{ name: string }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
       .subscribe(responseData => {
         console.log(responseData);
       });
@@ -45,9 +45,9 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
-    this.http.get<{[key: string]: Post}>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+    this.http.get<{ [key: string]: Post }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
       .pipe(map(responseData => {
-        const postsArray = [];
+        const postsArray: Post[] = [];
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
             postsArray.push({ ...responseData[key], id: key })
