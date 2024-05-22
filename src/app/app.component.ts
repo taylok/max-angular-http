@@ -19,6 +19,7 @@ export interface Post {
 })
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
+  isFetching = false;
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetching = true;
     this.http.get<{ [key: string]: Post }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
       .pipe(map(responseData => {
         const postsArray: Post[] = [];
@@ -57,6 +59,7 @@ export class AppComponent implements OnInit {
       }))
       .subscribe(posts => {
         //console.log(posts);
+        this.isFetching = false; 
         this.loadedPosts = posts;
       });
   }

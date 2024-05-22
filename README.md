@@ -11,3 +11,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | 0.2.3 | Transform get response | RxJs                |
 | 0.2.4 | Response data types    | HttpClient generics |
 | 0.2.5 | Output data            | html                |
+| 0.2.6 | Loading indicator      | html                |

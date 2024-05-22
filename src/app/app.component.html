@@ -39,7 +39,10 @@
   </div>
   <div>
     <div>
-      @if (loadedPosts.length < 1) {
+      @if (isFetching) {
+        <p>Loading...</p>
+        }
+      @if (loadedPosts.length < 1 && !isFetching) {
       <p>No posts available!</p>
       } @else { @for (post of loadedPosts; track post) {
       <ul>
