@@ -4,6 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
+export interface Post {
+  title: string;
+  content: string;
+  id?: string;
+}
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -23,7 +29,7 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     //console.log(postData);
-    this.http.post('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
+    this.http.post<{name: string}>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
       .subscribe(responseData => {
         console.log(responseData);
       });
@@ -39,12 +45,12 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
-    this.http.get('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+    this.http.get<{[key: string]: Post}>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
       .pipe(map(responseData => {
         const postsArray = [];
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
-            postsArray.push({ ...responseData[key as keyof typeof responseData], id: key })
+            postsArray.push({ ...responseData[key], id: key })
           }
         }
         return postsArray;
