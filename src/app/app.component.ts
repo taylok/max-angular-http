@@ -2,11 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { map } from 'rxjs/operators';
 import { Post } from './models/postl.model';
 import { PostsService } from './services/posts.service';
 import { Subscription } from 'rxjs';
-import { unsubscribe } from 'diagnostics_channel';
 
 @Component({
   selector: 'app-root',
@@ -31,11 +29,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isFetching = true;
     this.postsService.fetchPosts()
-      .subscribe(posts => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
-      }, error => {
-        this.error = error.message;
+      .subscribe({
+        next: (posts) => {
+          this.isFetching = false;
+          this.loadedPosts = posts;
+        },
+        error: (error) => {
+          this.isFetching = false;  // It's good practice to ensure isFetching is set to false even in case of an error
+          this.error = error.message;
+        }
       });
   }
 
@@ -46,11 +48,15 @@ export class AppComponent implements OnInit, OnDestroy {
   onFetchPosts() {
     // Send Http request
     this.postsService.fetchPosts()
-      .subscribe(posts => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
-      }, error => {
-        this.error = error.message;
+      .subscribe({
+        next: (posts) => {
+          this.isFetching = false;
+          this.loadedPosts = posts;
+        },
+        error: (error) => {
+          this.isFetching = false;  // It's good practice to ensure isFetching is set to false even in case of an error
+          this.error = error.message;
+        }
       });
   }
 
