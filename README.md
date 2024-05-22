@@ -18,3 +18,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | 0.5.0 | Bootstrap css form controls         | css                 |
 | 0.5.1 | Bootstrap additional style          | css                 |
 | 0.6.0 | Handling Errors                     | Errors              |
+| 0.6.1 | Using Subjects for error handling   | Errors              |
