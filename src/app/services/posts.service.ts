@@ -11,6 +11,7 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   createAndStorePost(title: string, content: string) {
+    // Subscribe within service as we don't nee Component controller to handle response
     const postData: Post = { title: title, content: content };
     this.http.post<{ name: string }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
       .subscribe(responseData => {
@@ -19,7 +20,8 @@ export class PostsService {
   }
 
   fetchPosts() {
-    this.http.get<{ [key: string]: Post }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
+    // Return observable so Component contrller handles response 
+    return this.http.get<{ [key: string]: Post }>('https://ng-max-guide-428f9-default-rtdb.europe-west1.firebasedatabase.app/posts.json')
       .pipe(map(responseData => {
         const postsArray: Post[] = [];
         for (const key in responseData) {
@@ -28,7 +30,7 @@ export class PostsService {
           }
         }
         return postsArray;
-      }))
-      .subscribe(posts => { });
+      })
+    );
   }
 }
