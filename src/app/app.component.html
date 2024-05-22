@@ -1,5 +1,5 @@
-<div>
-  <div>
+<div class="container">
+  <div class="row">
     <div>
       <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
         <div class="form-group">
@@ -23,29 +23,40 @@
             name="content"
           ></textarea>
         </div>
-        <button type="submit" [disabled]="!postForm.valid">Send Post</button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!postForm.valid"
+        >
+          Send Post
+        </button>
       </form>
     </div>
   </div>
   <hr />
   <div class="row">
     <div>
-      <button (click)="onFetchPosts()">Fetch Posts</button>
+      <button class="btn btn-primary" (click)="onFetchPosts()">
+        Fetch Posts
+      </button>
       |
-      <button [disabled]="loadedPosts.length < 1" (click)="onClearPosts()">
+      <button
+        class="btn btn-danger"
+        [disabled]="loadedPosts.length < 1"
+        (click)="onClearPosts()"
+      >
         Clear Posts
       </button>
     </div>
   </div>
-  <div>
+  <div class="row">
     <div>
       @if (isFetching) {
-        <p>Loading...</p>
-        }
-      @if (loadedPosts.length < 1 && !isFetching) {
+      <p>Loading...</p>
+      } @if (loadedPosts.length < 1 && !isFetching) {
       <p>No posts available!</p>
       } @else { @for (post of loadedPosts; track post) {
-      <ul>
+      <ul class="list-group">
         <h3>{{ post.title }}</h3>
         <p>{{ post.content }}</p>
       </ul>
