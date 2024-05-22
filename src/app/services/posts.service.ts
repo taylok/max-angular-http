@@ -42,7 +42,8 @@ export class PostsService {
       }),
       catchError(errorResp => {
         // Send to analytics server
-        return throwError(() => new Error(errorResp));
+        //console.log(errorResp);
+        return throwError(() =>errorResp);
       })
     );
   }

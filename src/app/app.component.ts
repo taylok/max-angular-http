@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
   isFetching = false;
-  error = null as any;
+  error = null;
   private errorSub: Subscription = new Subscription;
 
   constructor(private http: HttpClient, private postsService: PostsService) { }
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.error = null;
     this.errorSub = this.postsService.error.subscribe(errorMessage => {
-      this.error = errorMessage;
+      this.error = errorMessage as any;
     });
 
     this.isFetching = true;
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.loadedPosts = posts;
         },
         error: (error) => {
-          this.isFetching = false;  // It's good practice to ensure isFetching is set to false even in case of an error
+          this.isFetching = false;
           this.error = error.message;
         }
       });
