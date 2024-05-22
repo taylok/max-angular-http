@@ -16,3 +16,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | 0.3.0 | Second refactor controller and view | MVC                 |
 | 0.4.0 | Delete posts                        | Delete data         |
 | 0.5.0 | Bootstrap css form controls         | css                 |
+| 0.5.1 | Bootstrap additional style          | css                 |
